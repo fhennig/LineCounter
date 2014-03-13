@@ -7,8 +7,7 @@ import java.util.List;
 
 public class SourceDirectory extends SourceContainer
 {
-	private List<SourceDirectory> _childDirectories = new ArrayList<>();
-	private List<SourceFile> _files = new ArrayList<>();
+	private List<SourceContainer> _children = new ArrayList<>();
 	
 	
 	
@@ -21,37 +20,24 @@ public class SourceDirectory extends SourceContainer
 		for (File f : directory.listFiles())
 		{
 			if (f.isFile())
-				_files.add(new SourceFile(f));
+				_children.add(new SourceFile(f));
 			else if (f.isDirectory())
-				_childDirectories.add(new SourceDirectory(f));
+				_children.add(new SourceDirectory(f));
 		}
-	}
-	
-	
-
-	public List<SourceContainer> getChildEntries()
-	{
-		return new ArrayList<>(); //TODO
-	}
-	
-	public List<SourceDirectory> getChildDirectories()
-	{
-		return Collections.unmodifiableList(_childDirectories);
-	}
-	
-	public List<SourceFile> getFiles()
-	{
-		return Collections.unmodifiableList(_files);
 	}
 	
 	@Override
 	public int getLineCount()
 	{
 		int lineCount = 0;
-		for (SourceContainer sc : _childDirectories)
-			lineCount += sc.getLineCount();
-		for (SourceContainer sc : _files)
+		for (SourceContainer sc : _children)
 			lineCount += sc.getLineCount();
 		return lineCount;
+	}
+
+	@Override
+	public List<SourceContainer> getChildren()
+	{
+		return Collections.unmodifiableList(_children);
 	}
 }

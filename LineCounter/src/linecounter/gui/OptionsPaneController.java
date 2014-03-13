@@ -13,8 +13,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
+import linecounter.logic.LineFilter;
 import linecounter.logic.SourceContainer;
 import linecounter.logic.SourceDirectory;
+import linecounter.logic.SourceFile;
 
 public class OptionsPaneController
 {
@@ -54,13 +56,26 @@ public class OptionsPaneController
 		try
 		{
 			File root = new File(_filePathTextBox.getText());
-			SourceContainer sc = new SourceDirectory(root);
+			SourceContainer sc = null;
+			if (root.isDirectory())
+				sc = new SourceDirectory(root);
+			else if (root.isFile())
+				sc = new SourceFile(root);
+			if (sc == null)
+				throw new Exception("The given File is not valid");
+			prepareLineFilter();
 			for (LineCountListener l : _listeners)
 				l.lineCountGenerated(sc);
 		} catch (Exception ex)
 		{
 			JOptionPane.showMessageDialog(null, "Fehler:\n\n" + ex.toString());
 		}
+	}
+	
+	private void prepareLineFilter()
+	{
+		LineFilter filter = LineFilter.getInstance();
+		filter.setSkipEmptyLines(_emptyLinesCheckBox.isSelected());
 	}
 	
 	public void addLineCountListener(LineCountListener listener)

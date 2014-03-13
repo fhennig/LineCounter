@@ -1,6 +1,7 @@
 package linecounter.logic;
 
 import java.io.File;
+import java.util.List;
 
 public abstract class SourceContainer
 {
@@ -21,6 +22,8 @@ public abstract class SourceContainer
 	}	
 	
 	public abstract int getLineCount();
+	
+	public abstract List<SourceContainer> getChildren();
 	
 	@Override
 	public String toString()

@@ -7,8 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import linecounter.logic.SourceContainer;
-import linecounter.logic.SourceDirectory;
-import linecounter.logic.SourceFile;
 
 public class TreePaneController implements LineCountListener
 {
@@ -33,25 +31,16 @@ public class TreePaneController implements LineCountListener
 	@Override
 	public void lineCountGenerated(SourceContainer sc)
 	{
-		if (sc instanceof SourceDirectory)
-		{
-			unravelDirectory((SourceDirectory) sc, _treeView.getRoot());
-		}
-		else
-			_treeView.getRoot().getChildren().add(new TreeItem<SourceContainer>(sc));
+		unravelDirectory(sc, _treeView.getRoot());
 	}
 	
-	private void unravelDirectory(SourceDirectory directory, TreeItem<SourceContainer> root)
+	private void unravelDirectory(SourceContainer sourceContainer, TreeItem<SourceContainer> root)
 	{
-		TreeItem<SourceContainer> newRoot =new TreeItem<SourceContainer>(directory); 
+		TreeItem<SourceContainer> newRoot =new TreeItem<SourceContainer>(sourceContainer); 
 		root.getChildren().add(newRoot);
-		for (SourceDirectory dir : directory.getChildDirectories())
+		for (SourceContainer dir : sourceContainer.getChildren())
 		{
 			unravelDirectory(dir, newRoot);
-		}
-		for (SourceFile file : directory.getFiles())
-		{
-			newRoot.getChildren().add(new TreeItem<SourceContainer>(file));
 		}
 	}
 }

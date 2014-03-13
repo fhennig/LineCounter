@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SourceFile extends SourceContainer
 {
@@ -43,8 +45,15 @@ public class SourceFile extends SourceContainer
 		} catch (IOException e) { e.printStackTrace(); }
 	}
 	
+	@Override
 	public int getLineCount()
 	{
 		return _lineCount;
+	}
+
+	@Override
+	public List<SourceContainer> getChildren()
+	{
+		return new ArrayList<>();
 	}
 }

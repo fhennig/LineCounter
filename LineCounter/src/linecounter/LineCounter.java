@@ -1,13 +1,8 @@
 package linecounter;
 
 import java.io.File;
-import java.net.URL;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import javax.swing.JOptionPane;
 
@@ -47,7 +42,7 @@ public class LineCounter
 		if (sc instanceof SourceDirectory)
 		{
 			StringBuilder sb = new StringBuilder();
-			for (SourceContainer child : ((SourceDirectory)sc).getChildEntries())
+			for (SourceContainer child : ((SourceDirectory)sc).getChildren())
 			{
 				sb.append(printRecursive(child));
 				sb.append("\n");
