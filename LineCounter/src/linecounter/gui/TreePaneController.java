@@ -26,17 +26,19 @@ public class TreePaneController implements LineCountListener
 	void initialize()
 	{
 		assert _treeView != null : "fx:id=\"_treeView\" was not injected: check your FXML file 'TreePane.fxml'.";
-		
+		_treeView.setShowRoot(false);
+		_treeView.setRoot(new TreeItem<SourceContainer>());
 	}
 
 	@Override
 	public void lineCountGenerated(SourceContainer sc)
 	{
-		_treeView.setRoot(new TreeItem<SourceContainer>(sc));
 		if (sc instanceof SourceDirectory)
 		{
 			unravelDirectory((SourceDirectory) sc, _treeView.getRoot());
 		}
+		else
+			_treeView.getRoot().getChildren().add(new TreeItem<SourceContainer>(sc));
 	}
 	
 	private void unravelDirectory(SourceDirectory directory, TreeItem<SourceContainer> root)
