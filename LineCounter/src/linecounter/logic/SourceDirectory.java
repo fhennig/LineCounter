@@ -19,12 +19,12 @@ public class SourceDirectory extends SourceContainer
 				
 		for (File f : directory.listFiles())
 		{
-			if (f.isFile())
-				_children.add(new SourceFile(f));
-			else if (f.isDirectory())
-				_children.add(new SourceDirectory(f));
+			if (f.isFile() || f.isDirectory())
+				_children.add(SourceContainer.getTree(f));
 		}
 	}
+	
+	
 	
 	@Override
 	public int getLineCount()

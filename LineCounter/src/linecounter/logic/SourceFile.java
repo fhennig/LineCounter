@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SourceFile extends SourceContainer
 {
@@ -18,15 +16,15 @@ public class SourceFile extends SourceContainer
 		if (!file.isFile())
 			throw new IllegalArgumentException(file + " is not a File!");
 		
-		countLines();
+		countLines(file);
 	}
 	
-	private void countLines()
+	private void countLines(File file)
 	{
 		FileReader fileReader;
 		try
 		{
-			fileReader = new FileReader(getOriginalFile());
+			fileReader = new FileReader(file);
 		} catch (FileNotFoundException e1)
 		{
 			_lineCount = 0;
@@ -49,11 +47,5 @@ public class SourceFile extends SourceContainer
 	public int getLineCount()
 	{
 		return _lineCount;
-	}
-
-	@Override
-	public List<SourceContainer> getChildren()
-	{
-		return new ArrayList<>();
 	}
 }

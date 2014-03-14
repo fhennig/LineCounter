@@ -1,6 +1,7 @@
 package linecounter.logic;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class SourceContainer
@@ -16,14 +17,27 @@ public abstract class SourceContainer
 	
 	
 	
-	protected File getOriginalFile()
+	/** Factory method. */
+	public static SourceContainer getTree(File file)
 	{
-		return _originalFile;
-	}	
+		if (file.isFile())
+			return new SourceFile(file);
+		else if (file.isDirectory())
+			return new SourceDirectory(file);
+		else
+			throw new IllegalArgumentException(file + " is not a file or directory.");
+	}
 	
 	public abstract int getLineCount();
 	
-	public abstract List<SourceContainer> getChildren();
+	/**
+	 * This method should be overridden.
+	 * This default implementation returns an empty list.
+	 */
+	public List<SourceContainer> getChildren()
+	{
+		return new ArrayList<SourceContainer>();
+	}
 	
 	@Override
 	public String toString()
