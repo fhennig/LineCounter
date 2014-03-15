@@ -7,6 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
 <fx:root type="javafx.scene.layout.VBox" id="VBox" prefHeight="400.0" prefWidth="600.0" spacing="0.0" style="-fx-background-color: #EEEEEE;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
@@ -15,14 +16,26 @@
         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
       </VBox.margin>
     </fx:include>
-    <TabPane fx:id="_tabPane" prefHeight="200.0" prefWidth="200.0" style="-fx-effect: null;&#10;" styleClass="headers-region" tabClosingPolicy="ALL_TABS" VBox.vgrow="ALWAYS">
+    <TabPane fx:id="_tabPane" prefHeight="200.0" prefWidth="200.0" style="" tabClosingPolicy="ALL_TABS" VBox.vgrow="ALWAYS">
       <stylesheets>
         <URL value="@mystyle.css" />
       </stylesheets>
       <tabs>
-        <Tab text="Untitled Tab">
+        <Tab text="Titled Tab">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+              <children>
+                <BorderPane minHeight="46.0" prefHeight="298.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <center>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="JavaFX fuck yea!">
+                      <font>
+                        <Font name="a dripping marker" size="80.0" />
+                      </font>
+                    </Text>
+                  </center>
+                </BorderPane>
+              </children>
+            </AnchorPane>
           </content>
         </Tab>
       </tabs>
