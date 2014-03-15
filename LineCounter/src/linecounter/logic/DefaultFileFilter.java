@@ -6,8 +6,8 @@ import java.io.FileFilter;
 public class DefaultFileFilter implements FileFilter
 {
 	@Override
-	public boolean accept(File pathname)
+	public boolean accept(File file)
 	{
-		return true;
+		return (file.isFile() || file.isDirectory());
 	}
 }

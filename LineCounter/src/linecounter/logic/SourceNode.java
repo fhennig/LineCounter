@@ -2,9 +2,10 @@ package linecounter.logic;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class SourceNode<S extends FileStats>
+public class SourceNode<S extends CommonStats>
 {
 	private final String _name;
 	private final S _stats;
@@ -25,8 +26,8 @@ public class SourceNode<S extends FileStats>
 			initChildren(file);
 			_stats = _config.summarizeStats(getChildStats());
 		}
-		
-		throw new IllegalArgumentException();
+		else
+			throw new IllegalArgumentException();
 	}
 	
 	
@@ -53,6 +54,11 @@ public class SourceNode<S extends FileStats>
 	public S getStats()
 	{
 		return _stats;
+	}
+	
+	public List<SourceNode<S>> getChildren()
+	{
+		return Collections.unmodifiableList(_children);
 	}
 	
 	@Override

@@ -6,13 +6,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-public class FileStats
+public class CommonStats
 {
 	private int _allLines;
 	
 	
 	
-	public FileStats(File file)
+	public CommonStats(File file)
 	{
 		if (!file.isFile())
 			throw new IllegalArgumentException();
@@ -27,9 +27,9 @@ public class FileStats
 		}
 	}
 		
-	public FileStats(List<? extends FileStats> stats)
+	public CommonStats(List<? extends CommonStats> stats)
 	{
-		for (FileStats fs : stats)
+		for (CommonStats fs : stats)
 			_allLines += fs.getAllLines();
 	}
 	
@@ -58,5 +58,11 @@ public class FileStats
 	public int getAllLines()
 	{
 		return _allLines;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "[" + _allLines + "]";
 	}
 }

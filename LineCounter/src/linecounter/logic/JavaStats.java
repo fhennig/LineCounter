@@ -3,7 +3,7 @@ package linecounter.logic;
 import java.io.File;
 import java.util.List;
 
-public class JavaStats extends FileStats
+public class JavaStats extends CommonStats
 {
 	private int _emptyLines;
 	private int _docLines;
@@ -65,5 +65,11 @@ public class JavaStats extends FileStats
 	public int getSourceLines()
 	{
 		return _sourceLines;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "[\t" + getAllLines() + "|\t" + _sourceLines + "|\t" + _docLines + "|\t" + _emptyLines + "]";
 	}
 }

@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="300.0" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="linecounter.gui.GuiController">
+<fx:root type="javafx.scene.layout.VBox" id="VBox" prefHeight="400.0" prefWidth="600.0" spacing="0.0" style="-fx-background-color: #EEEEEE;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <Accordion minWidth="300.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <expandedPane>
-        <TitledPane id="x3" fx:id="x2" animated="false" text="Results">
+    <fx:include fx:id="_optionsPane" source="OptionsPane.fxml" VBox.vgrow="NEVER">
+      <VBox.margin>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </VBox.margin>
+    </fx:include>
+    <TabPane fx:id="_tabPane" prefHeight="200.0" prefWidth="200.0" style="-fx-effect: null;&#10;" styleClass="headers-region" tabClosingPolicy="ALL_TABS" VBox.vgrow="ALWAYS">
+      <stylesheets>
+        <URL value="@mystyle.css" />
+      </stylesheets>
+      <tabs>
+        <Tab text="Untitled Tab">
           <content>
-            <AnchorPane minHeight="352.0" prefHeight="352.0" prefWidth="600.0">
-              <children>
-                <fx:include fx:id="_treePane" source="TreePane.fxml" prefHeight="353.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-              </children>
-            </AnchorPane>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
           </content>
-        </TitledPane>
-      </expandedPane>
-      <panes>
-        <TitledPane id="x4" fx:id="x1" animated="false" text="Choose Path and Options">
-          <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-              <children>
-                <fx:include fx:id="_optionsPane" source="OptionsPane.fxml" prefHeight="103.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-              </children>
-            </AnchorPane>
-          </content>
-        </TitledPane>
-        <fx:reference source="x2" />
-      </panes>
-    </Accordion>
+        </Tab>
+      </tabs>
+      <VBox.margin>
+        <Insets />
+      </VBox.margin>
+    </TabPane>
   </children>
-</AnchorPane>
+  <padding>
+    <Insets />
+  </padding>
+</fx:root>
