@@ -1,54 +1,25 @@
 package linecounter.logic;
 
 import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.List;
 
-import linecounter.logic.linefilter.FileAnalyzer;
-
-public class SourceTree
+public class SourceTree<S extends FileStats>
 {
-	private SourceInformation _root;
-	private FileAnalyzer _fileAnalyzer;
+	private final SourceNode<S> _root;
 	
-	public SourceTree(File file, FilenameFilter fileFilter, FileAnalyzer fileAnalyzer)
+	
+	
+	public SourceTree(File file, TreeConfig<S> analyzer)
 	{
-		_fileAnalyzer = fileAnalyzer;
+		if ((file.isFile() && !analyzer.getFileFilter().accept(file)) || 
+				!(file.isDirectory() || file.isFile()))
+			file = new File("null");
 		
-		_root = getTree(file);
+		_root = new SourceNode<>(file, analyzer);
 	}
 	
-//	private SourceInformation initRoot(File file)
-//	{
-//		SourceInformation root = getTree(file);
-//		return root; //TODO
-//			
-//	}
 	
-	private SourceInformation getTree(File file)
-	{
-		if (file.isFile())
-		{
-			return _fileAnalyzer.analyze(file);
-		}
-		else if (file.isDirectory())
-		{
-			List<SourceInformation> children = new ArrayList<>();
-			for (File subFile : file.listFiles())
-			{
-				SourceInformation subInfo = getTree(subFile);
-				if (subInfo != null)
-					children.add(subInfo);
-			}
-			return new SummarizedSourceInformation(children);
-		}
-		
-		return null;
-	}
 	
-	/** Can be null */
-	public SourceInformation getRoot()
+	public SourceNode<S> getRoot()
 	{
 		return _root;
 	}
