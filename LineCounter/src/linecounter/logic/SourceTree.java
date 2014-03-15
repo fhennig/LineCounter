@@ -1,48 +1,55 @@
 package linecounter.logic;
 
 import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.List;
+
+import linecounter.logic.linefilter.FileAnalyzer;
 
 public class SourceTree
 {
 	private SourceInformation _root;
-	private LineFilter _filter;
-	private String _name = "Tree";
+	private FileAnalyzer _fileAnalyzer;
 	
-	public SourceTree(File file, LineFilter filter)
+	public SourceTree(File file, FilenameFilter fileFilter, FileAnalyzer fileAnalyzer)
 	{
-		_filter = filter;
+		_fileAnalyzer = fileAnalyzer;
 		
-		if (file.isFile())
-			_root = new DefaultSourceInformation(file, _filter);
-//		else if (file.isDirectory())
-//			_
-		getTree(null); //TODO
+		_root = getTree(file);
 	}
+	
+//	private SourceInformation initRoot(File file)
+//	{
+//		SourceInformation root = getTree(file);
+//		return root; //TODO
+//			
+//	}
 	
 	private SourceInformation getTree(File file)
 	{
+		if (file.isFile())
+		{
+			return _fileAnalyzer.analyze(file);
+		}
+		else if (file.isDirectory())
+		{
+			List<SourceInformation> children = new ArrayList<>();
+			for (File subFile : file.listFiles())
+			{
+				SourceInformation subInfo = getTree(subFile);
+				if (subInfo != null)
+					children.add(subInfo);
+			}
+			return new SummarizedSourceInformation(children);
+		}
+		
 		return null;
-		//TODO rekursiv aufrufen ....
 	}
 	
+	/** Can be null */
 	public SourceInformation getRoot()
 	{
 		return _root;
-	}
-	
-//	private List<SourceInformation> getChildren(File directory)
-//	{
-//		List<SourceInformation> result = new ArrayList<>();
-//		
-//		for (File file : directory.listFiles())
-//		{
-//			result.add(new DefaultSourceInformation(file, _filter));
-//		}
-//	}
-	
-	@Override
-	public String toString()
-	{
-		return _name;
 	}
 }
