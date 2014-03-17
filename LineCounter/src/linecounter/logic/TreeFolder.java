@@ -46,7 +46,7 @@ public class TreeFolder extends TreeNode
 	@Override
 	protected FileInfo initFileInfo()
 	{
-		return new FolderFileInfo(_file, _config.getFileInfoPrototype(), getChildInfo());
+		return new FolderFileInfo(_file, _config.getStatsToUse(), getChildInfo());
 	}
 	
 	private List<FileInfo> getChildInfo()

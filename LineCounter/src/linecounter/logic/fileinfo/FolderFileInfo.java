@@ -4,17 +4,15 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-public class FolderFileInfo implements FileInfo
+public class FolderFileInfo extends FileInfo
 {
-	private final String _fileName;
-	private final String _fileExtension;
-	private final String _amountChildren;
 	private final Map<String, Integer> _stats = new HashMap<String, Integer>();
 	
 	
 	
-	public FolderFileInfo(File folder, FileInfoPrototype prototype, List<FileInfo> childInfo)
+	public FolderFileInfo(File folder, Set<String> statsToUse, List<FileInfo> childInfo)
 	{
 		if (!folder.isDirectory())
 			throw new IllegalArgumentException();
@@ -22,14 +20,14 @@ public class FolderFileInfo implements FileInfo
 		_fileName = folder.getName();
 		_fileExtension = "";
 		_amountChildren = new Integer(childInfo.size()).toString();
-		initStats(prototype, childInfo);
+		initStats(statsToUse, childInfo);
 	}
 	
 	
 	
-	private void initStats(FileInfoPrototype prototype, List<FileInfo> childInfo)
+	private void initStats(Set<String> statsToUse, List<FileInfo> childInfo)
 	{
-		for (String key : prototype.cloneStatsKeys())
+		for (String key : statsToUse)
 		{
 			int statsSum = 0;
 			for (FileInfo child : childInfo)
@@ -38,24 +36,6 @@ public class FolderFileInfo implements FileInfo
 			}
 			_stats.put(key, statsSum);
 		}
-	}
-
-	@Override
-	public String getName()
-	{
-		return _fileName;
-	}
-
-	@Override
-	public String getExtension()
-	{
-		return _fileExtension;
-	}
-
-	@Override
-	public String getAmountChildren()
-	{
-		return _amountChildren;
 	}
 
 	@Override

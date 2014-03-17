@@ -30,6 +30,6 @@ public class TreeFile extends TreeNode
 	@Override
 	protected FileInfo initFileInfo()
 	{
-		return new DefaultFileInfo(_file, _config.getFileInfoPrototype());
+		return new DefaultFileInfo(_file, _config.getStatsToUse());
 	}
 }

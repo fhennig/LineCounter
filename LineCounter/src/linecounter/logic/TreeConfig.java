@@ -1,20 +1,19 @@
 package linecounter.logic;
 
 import java.io.FileFilter;
-
-import linecounter.logic.fileinfo.FileInfoPrototype;
+import java.util.Set;
 
 public class TreeConfig
 {
 	private final FileFilter _filter;
-	private final FileInfoPrototype _prototype;
+	private final Set<String> _statsToUse;
 	
 	
 	
-	public TreeConfig(FileFilter filter, FileInfoPrototype prototype)
+	public TreeConfig(FileFilter filter, Set<String> statsToUse)
 	{
 		_filter = filter;
-		_prototype = prototype;
+		_statsToUse = statsToUse;
 	}
 	
 	
@@ -24,8 +23,8 @@ public class TreeConfig
 		return _filter;
 	}
 	
-	public FileInfoPrototype getFileInfoPrototype()
+	public Set<String> getStatsToUse()
 	{
-		return _prototype;
+		return _statsToUse;
 	}
 }

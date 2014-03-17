@@ -1,8 +1,8 @@
 package linecounter.logic.fileinfo.stats;
 
-public interface AnalyzedStat
+public interface AnalyzingStat
 {
 	public void analyzeLine(String line);
 	public int getValue();
-	public AnalyzedStat cloneSetup();
+	public AnalyzingStat cloneSetup();
 }

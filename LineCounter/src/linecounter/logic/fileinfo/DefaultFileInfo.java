@@ -4,20 +4,20 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
-import linecounter.logic.fileinfo.stats.AnalyzedStat;
+import linecounter.logic.fileinfo.stats.AnalyzingStatFactory;
+import linecounter.logic.fileinfo.stats.AnalyzingStat;
 
-public class DefaultFileInfo implements FileInfo
+public class DefaultFileInfo extends FileInfo
 {
-	private final String _fileName;
-	private final String _fileExtension;
-	private final String _amountChildren;
-	private final Map<String, AnalyzedStat> _stats;
+	private final Map<String, AnalyzingStat> _stats = new HashMap<String, AnalyzingStat>();
 	
 	
 	
-	public DefaultFileInfo(File file, FileInfoPrototype prototype)
+	public DefaultFileInfo(File file, Set<String> statsToUse)
 	{
 		if (!file.isFile())
 			throw new IllegalArgumentException();
@@ -27,7 +27,7 @@ public class DefaultFileInfo implements FileInfo
 		_fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1);
 		_amountChildren = "";
 		
-		_stats = prototype.cloneStatsMap();
+		loadStats(statsToUse);
 		try
 		{
 			initStats(file);
@@ -38,6 +38,14 @@ public class DefaultFileInfo implements FileInfo
 	}
 	
 	
+	
+	private void loadStats(Set<String> statsToUse)
+	{
+		for (String stat : statsToUse)
+		{
+			_stats.put(stat, AnalyzingStatFactory.getInstance().newAnalyzingStat(stat));
+		}
+	}
 	
 	private void initStats(File file) throws IOException
 	{
@@ -56,28 +64,10 @@ public class DefaultFileInfo implements FileInfo
 
 	private void analyzeLine(String Line)
 	{
-		for (AnalyzedStat stat : _stats.values())
+		for (AnalyzingStat stat : _stats.values())
 		{
 			stat.analyzeLine(Line);
 		}
-	}
-
-	@Override
-	public String getName()
-	{
-		return _fileName;
-	}
-
-	@Override
-	public String getExtension()
-	{
-		return _fileExtension;
-	}
-
-	@Override
-	public String getAmountChildren()
-	{
-		return _amountChildren;
 	}
 
 	@Override
