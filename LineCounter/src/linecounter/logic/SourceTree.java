@@ -2,6 +2,8 @@ package linecounter.logic;
 
 import java.io.File;
 
+import linecounter.logic.stats.CommonStats;
+
 public class SourceTree<S extends CommonStats>
 {
 	private final SourceNode<S> _root;

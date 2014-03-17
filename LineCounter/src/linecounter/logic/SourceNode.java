@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import linecounter.logic.stats.CommonStats;
+
 public class SourceNode<S extends CommonStats>
 {
 	private final String _name;

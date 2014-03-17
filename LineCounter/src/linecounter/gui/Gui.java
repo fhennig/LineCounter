@@ -7,8 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
-import linecounter.logic.CommonStats;
 import linecounter.logic.SourceTree;
+import linecounter.logic.stats.CommonStats;
 
 public class Gui extends VBox implements TreeDisplay
 {

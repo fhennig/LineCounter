@@ -1,7 +1,7 @@
 package linecounter.gui;
 
-import linecounter.logic.CommonStats;
 import linecounter.logic.SourceTree;
+import linecounter.logic.stats.CommonStats;
 
 public interface TreeDisplay
 {

@@ -9,9 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
-import linecounter.logic.JavaStats;
 import linecounter.logic.JavaTreeConfig;
 import linecounter.logic.SourceTree;
+import linecounter.logic.stats.JavaStats;
 
 public class OptionsPaneController
 {

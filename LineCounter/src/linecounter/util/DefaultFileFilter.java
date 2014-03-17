@@ -1,4 +1,4 @@
-package linecounter.logic;
+package linecounter.util;
 
 import java.io.File;
 import java.io.FileFilter;

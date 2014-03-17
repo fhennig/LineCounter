@@ -7,9 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
-import linecounter.logic.CommonStats;
 import linecounter.logic.SourceNode;
 import linecounter.logic.SourceTree;
+import linecounter.logic.stats.CommonStats;
 
 public class TreePane extends AnchorPane
 {

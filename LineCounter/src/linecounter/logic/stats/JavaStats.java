@@ -1,4 +1,4 @@
-package linecounter.logic;
+package linecounter.logic.stats;
 
 import java.io.File;
 import java.util.List;
