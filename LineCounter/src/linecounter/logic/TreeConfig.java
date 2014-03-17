@@ -1,14 +1,31 @@
 package linecounter.logic;
 
-import java.io.File;
 import java.io.FileFilter;
-import java.util.List;
 
-import linecounter.logic.stats.CommonStats;
+import linecounter.logic.fileinfo.FileInfoPrototype;
 
-public interface TreeConfig<S extends CommonStats>
+public class TreeConfig
 {
-	public S getStats(File file);
-	public S summarizeStats(List<S> stats);
-	public FileFilter getFileFilter();
+	private final FileFilter _filter;
+	private final FileInfoPrototype _prototype;
+	
+	
+	
+	public TreeConfig(FileFilter filter, FileInfoPrototype prototype)
+	{
+		_filter = filter;
+		_prototype = prototype;
+	}
+	
+	
+	
+	public FileFilter getFileFilter()
+	{
+		return _filter;
+	}
+	
+	public FileInfoPrototype getFileInfoPrototype()
+	{
+		return _prototype;
+	}
 }
